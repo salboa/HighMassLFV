@@ -1,0 +1,133 @@
+2018-26-11 Antonio.Salvucci@CERN.ch
+    * Updated code for Rel21
+    * move using AnalysisBase 21.2.51
+    * Updated Egamma quantities
+    * Updated Jet/Btag recommendations
+    * Updated README
+    * Updated python scripts
+
+2018-09-18 Antonio.Salvucci@CERN.ch
+    * Bug fix in SubmitJobs.py
+    * Tagging HighMassLFV-00-00-04
+    *   tuned for Paper 2017 results (36.1 fb-1)
+    *   based on AnalysisBase 2.4.33
+
+2018-04-04 Antonio.Salvucci@CERN.ch
+    * Added Z' kfact derivation
+    * Some other fixes
+
+2017-10-21 Antonio.Salvucci@CERN.ch
+    * Updated 2016 data GRL
+    * Added more cutflow steps
+
+2017-08-28 Antonio.Salvucci@CERN.ch
+    * Updated code to latest recommendation
+    * Using AnalysisBase 2.4.33
+    * General bug-fixes
+    * Improved python scripts
+
+2017-06-02 Antonio Salvucci@CERN.ch
+    * Update code to latest prescription 
+    * Using AnalysisBase 2.4.29
+    * Added BDTcut choice
+    * Added some debug lines
+    * Removed double counting MuonScale sys
+
+2017-04-01 Antonio.Salvucci@CERN.ch
+    * Some bug-fixes
+    * Updated kfactor for DY/Z
+
+2016-10-12 Antonio.Salvucci@CERN.ch
+    * Added photon selection
+    * Fix 2015-2015 trigger SF
+    * Updated list of data and MC
+
+2016-09-28 Antonio.Salvucci@CERN.ch
+    * Added print systematics method
+    * Added run on single event method
+    * Cleaned unused lines
+
+2016-09-24 Antonio.Salvucci@CERN.ch
+    * Updated jet selection
+    * Added jet based event cleaning
+    * Updated cutflow information
+
+2016-09-16 ANtonio.Salvucci@CERN.ch
+    * Updated MET calculation
+    * Updated Systematics
+    * Updated Grid Submission script
+    * Added Photon Selection
+    * Added Photon Flow Histograms
+    
+2016-09-09 Antonio.Salvucci@CERN.ch
+    * Updated code adding 2016 prescriptions
+    *   removed isLoose selection 
+    *   removed isRobNtup option
+    *   added mcType option
+    * Updated Electron/Muon/Tau Selection
+    * Updated Jet selection
+    * Updated MET calculation
+
+2016-08-29 Antonio.Salvucci@CERN.ch
+    * Added RPV SVT samples
+    * Tagging HighMassLFV-00-00-03
+    *   tuned for Paper 2016 results (3.2 fb-1)
+    *   based on AnalysisBase 2.3.44
+
+2016-04-15 Antonio.Salvucci@CERN.ch
+    * Fixed d0sign bug
+    * updated to new HighPt Muon Working Point
+
+2016-03-17 Antonio.Salvucci@CERN.ch
+    * Added QCD Control Region Selection
+    *   opt1 -> electrons and muon non isolated
+    *   opt2 -> noTauID
+
+2016-02-08 Antonio.Salvucci@CERN.ch 
+    * Added Jet-Muon Overlap
+
+2016-02-03 Antonio.Salvucci@CERN.ch
+    * Added Tau selection
+    * Updated to Moriond 2016 recommendation
+    * Based on AnalysisBase 2.3.42
+
+2015-12-18 Antonio.Salvucci@CERN.ch
+    * bug Fix jet-el overlap
+    * Updated to EOYE 2015 analysis
+    * Tagging HighMassLFV-00-00-02:
+    *   tuned for EOYE 2015 results
+    *   based on AnalysisBase 2.3.36
+
+2015-11-27 Antonio.Salvucci@CERN.ch
+    * Bug fixes
+    * Updated list of data runs in Data.py
+
+2015-11-26 Antonio.Salvucci@CERN.ch
+    * Updated to EOYE (2015) recommendation
+    * Updated GRL and ilumicalc file
+
+2015-11-24 Antonio.Salvucci@CERN.ch
+    * Updated cutflow information
+    * Updated RunAnalysis submission script
+
+2015-11-23 Antonio.Salvucci@CERN.ch
+    * Update electron selection (z0 cut)
+    * Added L1Calo BCID rejection
+    * Updated cutflow maps
+
+2015-11-18 Antonio.Salvucci@CERN.ch
+    * Added muon-elec overlap removal
+    * Removed OS check
+
+2015-10-10 Antonio.Salvucci@CERN.ch
+    * Fixed GRL for run on data
+
+2015-10-07 Antonio.Salvucci@CERN.ch
+    * Updating with TightLH electron ID
+    * Python script to submit jobs
+
+2015-09-28 Antonio.Salvucci@CERN.ch
+    * Tagging HighMassLFV-00-00-01:
+    *    tuned for 50ns analysis
+    *    updated to pt>65 GeV and non isolated triggers
+    *    based on AnalysisBase 2.3.24

@@ -1,0 +1,285 @@
+#!/usr/bin/python
+import os
+import sys
+
+Backgrounds = ["DY", "Top", "DiBoson", "Wjets", "AllBkg"]
+
+DY = { "mc16a": [["mc15_13TeV.301000.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_120M180.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+                 ["mc15_13TeV.301001.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_180M250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+                 ["mc15_13TeV.301002.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_250M400.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+                 ["mc15_13TeV.301003.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_400M600.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False]],
+       "mc16d": [],
+       "mc16e": [] }
+
+Top = { "mc16a": [], 
+        "mc16d": [],  
+        "mc16e": [] }
+
+DiBoson =  { "mc16a": [], 
+             "mc16d": [],  
+             "mc16e": [] }
+
+Wjets =  { "mc16a": [], 
+           "mc16d": [],  
+           "mc16e": [] }
+
+
+
+BKG = [ ["mc15_13TeV.301000.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_120M180.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+        ["mc15_13TeV.301001.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_180M250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False] ]
+
+Bkg_mc16a = [ #mc16a all background samples
+    
+    #DY/Z->ll
+    ["mc15_13TeV.301000.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_120M180.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301001.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_180M250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301002.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_250M400.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301003.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_400M600.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301004.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_600M800.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301005.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_800M1000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301006.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_1000M1250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301007.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_1250M1500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301008.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_1500M1750.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301009.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_1750M2000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301010.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_2000M2250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301011.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_2250M2500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301012.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_2500M2750.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301013.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_2750M3000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301014.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_3000M3500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301015.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_3500M4000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301016.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_4000M4500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301017.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_4500M5000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301018.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYee_5000M.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301020.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_120M180.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301021.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_180M250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301022.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_250M400.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301023.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_400M600.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301024.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_600M800.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301025.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_800M1000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301026.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_1000M1250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301027.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_1250M1500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301028.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_1500M1750.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301029.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_1750M2000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301030.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_2000M2250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301031.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_2250M2500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301032.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_2500M2750.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301033.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_2750M3000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301034.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_3000M3500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301035.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_3500M4000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301036.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_4000M4500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301037.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_4500M5000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301038.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYmumu_5000M.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301040.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_120M180.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301041.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_180M250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301042.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_250M400.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301043.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_400M600.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301044.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_600M800.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301045.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_800M1000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301046.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_1000M1250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301047.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_1250M1500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301048.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_1500M1750.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301049.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_1750M2000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301050.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_2000M2250.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301051.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_2250M2500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301052.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_2500M2750.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301053.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_2750M3000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301054.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_3000M3500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301055.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_3500M4000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301056.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_4000M4500.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301057.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_4500M5000.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.301058.PowhegPythia8EvtGen_AZNLOCTEQ6L1_DYtautau_5000M.merge.DAOD_HIGG4D2.e3649_s2576_s2132_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.361106.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Zee.merge.DAOD_HIGG4D2.e3601_s2576_s2132_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.361107.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Zmumu.merge.DAOD_HIGG4D2.e3601_s2576_s2132_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.361108.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Ztautau.merge.DAOD_HIGG4D2.e3601_s2726_r7725_r7676_p2949/", False, False],
+    
+    #ttbar/Single Top
+    ["mc15_13TeV.410000.PowhegPythiaEvtGen_P2012_ttbar_hdamp172p5_nonallhad.merge.DAOD_HIGG4D2.e3698_s2608_s2183_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.410013.PowhegPythiaEvtGen_P2012_Wt_inclusive_top.merge.DAOD_HIGG4D2.e3753_s2608_s2183_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.410014.PowhegPythiaEvtGen_P2012_Wt_inclusive_antitop.merge.DAOD_HIGG4D2.e3753_s2608_s2183_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.410142.Sherpa_NNPDF30NNLO_ttll_mll5.merge.DAOD_HIGG4D2.e4686_a766_a818_r7676_p3017/", True, False],
+    ["mc15_13TeV.410143.Sherpa_NNPDF30NNLO_ttZnnqq.merge.DAOD_HIGG4D2.e4686_a766_a818_r7676_p3017/", True, False],
+    ["mc15_13TeV.410144.Sherpa_NNPDF30NNLO_ttW.merge.DAOD_HIGG4D2.e4686_a766_a818_r7676_p3017/", True, False],
+    
+    #DiBoson
+    ["mc15_13TeV.361063.Sherpa_CT10_llll.merge.DAOD_HIGG4D2.e3836_s2608_s2183_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.361064.Sherpa_CT10_lllvSFMinus.merge.DAOD_HIGG4D2.e3836_s2608_s2183_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.361065.Sherpa_CT10_lllvOFMinus.merge.DAOD_HIGG4D2.e3836_s2608_s2183_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.361066.Sherpa_CT10_lllvSFPlus.merge.DAOD_HIGG4D2.e3836_s2608_s2183_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.361067.Sherpa_CT10_lllvOFPlus.merge.DAOD_HIGG4D2.e3836_s2608_s2183_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.361091.Sherpa_CT10_WplvWmqq_SHv21_improved.merge.DAOD_HIGG4D2.e4607_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.361092.Sherpa_CT10_WpqqWmlv_SHv21_improved.merge.DAOD_HIGG4D2.e4607_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.361093.Sherpa_CT10_WlvZqq_SHv21_improved.merge.DAOD_HIGG4D2.e4607_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.361094.Sherpa_CT10_WqqZll_SHv21_improved.merge.DAOD_HIGG4D2.e4607_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.361095.Sherpa_CT10_WqqZvv_SHv21_improved.merge.DAOD_HIGG4D2.e4607_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.361096.Sherpa_CT10_ZqqZll_SHv21_improved.merge.DAOD_HIGG4D2.e4607_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.361097.Sherpa_CT10_ZqqZvv_SHv21_improved.merge.DAOD_HIGG4D2.e4607_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.303014.Sherpa_CT10_VV_evev_50M150.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303015.Sherpa_CT10_VV_evev_150M500.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303016.Sherpa_CT10_VV_evev_500M1000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303017.Sherpa_CT10_VV_evev_1000M2000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303018.Sherpa_CT10_VV_evev_2000M3000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303019.Sherpa_CT10_VV_evev_3000M4000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303020.Sherpa_CT10_VV_evev_4000M5000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303021.Sherpa_CT10_VV_evev_5000M.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303046.Sherpa_CT10_VV_muvmuv_50M150.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303047.Sherpa_CT10_VV_muvmuv_150M500.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303048.Sherpa_CT10_VV_muvmuv_500M1000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303049.Sherpa_CT10_VV_muvmuv_1000M2000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303050.Sherpa_CT10_VV_muvmuv_2000M3000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303051.Sherpa_CT10_VV_muvmuv_3000M4000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303052.Sherpa_CT10_VV_muvmuv_4000M5000.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303053.Sherpa_CT10_VV_muvmuv_5000M.merge.DAOD_HIGG4D2.e4188_s2608_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.303488.Sherpa_CT10_VV_evmuv_0M150.merge.DAOD_HIGG4D2.e4318_s2608_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.303489.Sherpa_CT10_VV_evmuv_150M500.merge.DAOD_HIGG4D2.e4318_s2608_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.303490.Sherpa_CT10_VV_evmuv_500M1000.merge.DAOD_HIGG4D2.e4318_s2608_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.303491.Sherpa_CT10_VV_evmuv_1000M2000.merge.DAOD_HIGG4D2.e4318_s2608_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.303492.Sherpa_CT10_VV_evmuv_2000M3000.merge.DAOD_HIGG4D2.e4318_s2608_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.303493.Sherpa_CT10_VV_evmuv_3000M4000.merge.DAOD_HIGG4D2.e4318_s2608_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.303494.Sherpa_CT10_VV_evmuv_4000M5000.merge.DAOD_HIGG4D2.e4318_s2608_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.303495.Sherpa_CT10_VV_evmuv_M5000.merge.DAOD_HIGG4D2.e4318_s2608_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304933.Sherpa_CT10_VV_evtauv_0M150.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304934.Sherpa_CT10_VV_evtauv_150M500.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304935.Sherpa_CT10_VV_evtauv_500M1000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304936.Sherpa_CT10_VV_evtauv_1000M2000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304937.Sherpa_CT10_VV_evtauv_2000M3000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304938.Sherpa_CT10_VV_evtauv_3000M4000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304939.Sherpa_CT10_VV_evtauv_4000M5000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304940.Sherpa_CT10_VV_evtauv_M5000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304941.Sherpa_CT10_VV_muvtauv_0M150.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304942.Sherpa_CT10_VV_muvtauv_150M500.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304943.Sherpa_CT10_VV_muvtauv_500M1000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304944.Sherpa_CT10_VV_muvtauv_1000M2000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304945.Sherpa_CT10_VV_muvtauv_2000M3000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304946.Sherpa_CT10_VV_muvtauv_3000M4000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304947.Sherpa_CT10_VV_muvtauv_4000M5000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304948.Sherpa_CT10_VV_muvtauv_M5000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304949.Sherpa_CT10_VV_tauvtauv_0M150.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304950.Sherpa_CT10_VV_tauvtauv_150M500.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304951.Sherpa_CT10_VV_tauvtauv_500M1000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304952.Sherpa_CT10_VV_tauvtauv_1000M2000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304953.Sherpa_CT10_VV_tauvtauv_2000M3000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304954.Sherpa_CT10_VV_tauvtauv_3000M4000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304955.Sherpa_CT10_VV_tauvtauv_4000M5000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    ["mc15_13TeV.304956.Sherpa_CT10_VV_tauvtauv_M5000.merge.DAOD_HIGG4D2.e4780_s2726_r7772_r7676_p2949/", False, False],
+    
+    #W+jets
+    ["mc15_13TeV.364156.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV0_70_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364157.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV0_70_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364158.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV0_70_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364159.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV70_140_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364160.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV70_140_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364161.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV70_140_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364162.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV140_280_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364163.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV140_280_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364164.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV140_280_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364165.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV280_500_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364166.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV280_500_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364167.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV280_500_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364168.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV500_1000.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364169.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV1000_E_CMS.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364170.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV0_70_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364171.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV0_70_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364172.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV0_70_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364173.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV70_140_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364174.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV70_140_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364175.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV70_140_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364176.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV140_280_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364177.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV140_280_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364178.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV140_280_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364179.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV280_500_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364180.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV280_500_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364181.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV280_500_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364182.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV500_1000.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364183.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV1000_E_CMS.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364184.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV0_70_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364185.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV0_70_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364186.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV0_70_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364187.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV70_140_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364188.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV70_140_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364189.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV70_140_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364190.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV140_280_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364191.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV140_280_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364192.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV140_280_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364193.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV280_500_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364194.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV280_500_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364195.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV280_500_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364196.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV500_1000.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364197.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV1000_E_CMS.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False]
+    
+    ]
+
+
+Bkg_mc16d = [ #mc16d all background samples
+    
+]
+
+
+Bkg_mc16e = [ #mc16e all background samples
+    
+]
+
+
+Wjets_mc16a = [ #W+jets mc16a samples
+    
+    ["mc15_13TeV.364156.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV0_70_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364157.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV0_70_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364158.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV0_70_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364159.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV70_140_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364160.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV70_140_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364161.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV70_140_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364162.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV140_280_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364163.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV140_280_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364164.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV140_280_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364165.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV280_500_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364166.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV280_500_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364167.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV280_500_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364168.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV500_1000.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364169.Sherpa_221_NNPDF30NNLO_Wmunu_MAXHTPTV1000_E_CMS.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364170.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV0_70_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364171.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV0_70_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364172.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV0_70_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364173.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV70_140_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364174.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV70_140_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364175.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV70_140_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364176.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV140_280_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364177.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV140_280_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364178.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV140_280_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364179.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV280_500_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364180.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV280_500_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364181.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV280_500_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364182.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV500_1000.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364183.Sherpa_221_NNPDF30NNLO_Wenu_MAXHTPTV1000_E_CMS.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364184.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV0_70_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364185.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV0_70_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364186.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV0_70_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364187.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV70_140_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364188.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV70_140_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364189.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV70_140_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364190.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV140_280_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364191.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV140_280_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364192.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV140_280_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364193.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV280_500_CVetoBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364194.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV280_500_CFilterBVeto.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364195.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV280_500_BFilter.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364196.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV500_1000.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False],
+    ["mc15_13TeV.364197.Sherpa_221_NNPDF30NNLO_Wtaunu_MAXHTPTV1000_E_CMS.merge.DAOD_HIGG4D2.e5340_s2726_r7772_r7676_p3017/", False, False]
+    
+    ]
+
+
+Wjets_mc16d = [ #W+jets mc16d samples
+
+]
+
+
+Wjets_mc16e = [ #W+jets mc16e samples
+
+]
+
+TopSys = [ #to be extended
+    
+    ["mc15_13TeV.410001.PowhegPythiaEvtGen_P2012radHi_ttbar_hdamp345_down_nonallhad.merge.DAOD_HIGG4D2.e3783_s2608_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.410002.PowhegPythiaEvtGen_P2012radLo_ttbar_hdamp172_up_nonallhad.merge.DAOD_HIGG4D2.e3783_s2608_r7725_r7676_p2949/", False, False],
+    ["mc15_13TeV.410007.PowhegPythiaEvtGen_P2012_ttbar_hdamp172p5_allhad.merge.DAOD_HIGG4D2.e4135_s2608_s2183_r7725_r7676_p2949/", False, False]
+    
+]
